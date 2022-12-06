@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "330147344943",
+    "project_id": "creditcardscanner-24772",
+    "storage_bucket": "creditcardscanner-24772.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330147344943:android:9d7d177ef3b0baa246ccda",
+        "android_client_info": {
+          "package_name": "com.example.creditcardscanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330147344943-20b5ci76cnb7rh9v8lv41r9h2ghuimh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMXg4ZZVyxIb5FD50olnAqYnvk-wX3U-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330147344943-20b5ci76cnb7rh9v8lv41r9h2ghuimh1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

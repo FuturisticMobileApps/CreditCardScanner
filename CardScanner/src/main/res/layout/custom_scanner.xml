@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/closeIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_margin="12dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_close" />
+
+    <TextView
+        android:id="@+id/tvCardDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/closeIcon"
+        android:layout_alignBottom="@+id/closeIcon"
+        android:layout_marginStart="24dp"
+        android:layout_toEndOf="@+id/closeIcon"
+        android:text="Card Details"
+        android:textColor="#080808"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tvScanCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgLogo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="Scan a Card"
+        android:textColor="#454545"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/tvHelpScanCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvScanCard"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:text="Line it up with the frame" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cameraCard"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@+id/tvHelpScanCard"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="38dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/viewFinder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/tvPermission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingHorizontal="20dp"
+        android:text="Camera permission is necessary to use device camera, Please enable it in the settings to scan a card or click Enter details manually which is shown below."
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cameraCard" />
+
+    <TextView
+        android:id="@+id/tvEnterDetailsManually"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="28dp"
+        android:gravity="center"
+        android:text="Enter details manually"
+        android:textAlignment="center"
+        android:textColor="#0044FF"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvManualEntryInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCardDetails"
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="20dp"
+        android:text="@string/manual_entry_details_text"
+        android:visibility="gone" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilCardNumber"
+        style="@style/TextInputLayoutStyle"
+        android:layout_below="@+id/tvManualEntryInfo"
+        android:hint="@string/credit_card_number"
+        android:paddingHorizontal="20dp"
+        android:visibility="gone"
+        app:endIconMode="none">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCardNumber"
+            style="@style/TextInputEditTextStyle"
+            android:digits="0123456789"
+            android:drawableEnd="@drawable/cards_default"
+            android:imeOptions="actionNext"
+            android:maxLength="16"
+            android:textColor="@color/text_color"
+            android:textColorHint="#757575"
+            android:textSize="14sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilExpiryDate"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tilCardNumber"
+        android:hint="@string/mm_yy"
+        android:minWidth="160dp"
+        android:paddingHorizontal="20dp"
+        android:visibility="gone">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etExpiryDate"
+            style="@style/TextInputEditTextStyle"
+            android:imeOptions="actionDone"
+            android:longClickable="false"
+            android:maxLength="16"
+            android:textColor="@color/text_color"
+            android:textSize="14sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnContinue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tilExpiryDate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#0044FF"
+        android:paddingHorizontal="40dp"
+        android:text="@string/continue_btn_text"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+</RelativeLayout>

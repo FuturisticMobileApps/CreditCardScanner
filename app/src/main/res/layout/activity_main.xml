@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/PageHeadingStyle"
+        android:layout_width="wrap_content"
+        android:layout_alignTop="@+id/tvScanner"
+        android:layout_alignBottom="@+id/tvScanner"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/tvScanner"
+        android:gravity="center"
+        android:text="@string/credit_card_details"
+        android:textAlignment="textStart"
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/tvScanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/blue_box"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:text="@string/scan_card"
+        android:textColor="#1F5999"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_document_scanner" />
+
+    <TextView
+        android:id="@+id/tvCardtypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvScanner"
+        android:layout_alignTop="@+id/tvCardType"
+        android:layout_alignBottom="@+id/tvCardType"
+        android:gravity="center"
+        android:text="Card Type : "
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvCardType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvScanner"
+        android:layout_marginStart="6dp"
+        android:layout_toEndOf="@+id/tvCardtypeLabel"
+        android:text="Visa"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:visibility="gone" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilCreditCard"
+        style="@style/TextInputLayoutStyle"
+        android:layout_below="@+id/tvCardType"
+        android:layout_marginTop="10dp"
+        android:hint="@string/credit_card_number"
+        app:endIconMode="none">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCreditCard"
+            style="@style/TextInputEditTextStyle"
+            android:clickable="false"
+            android:digits="0123456789"
+            android:focusable="false"
+            android:maxLength="16"
+            android:textColor="@color/text_color"
+            android:textColorHint="#757575"
+            android:textSize="14sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/llExpiryDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tilCreditCard"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilMonth"
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3.5"
+            android:hint="@string/month">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/acsMonth"
+                style="@style/TextInputEditTextStyle"
+                android:clickable="false"
+                android:digits="0123456789"
+                android:focusable="false"
+                android:longClickable="false"
+                android:maxLength="16"
+                android:textColor="@color/text_color"
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilYear"
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="3.5"
+            android:hint="@string/year">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/acsYear"
+                style="@style/TextInputEditTextStyle"
+                android:clickable="false"
+                android:digits="0123456789"
+                android:focusable="false"
+                android:longClickable="false"
+                android:maxLength="16"
+                android:textColor="@color/text_color"
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

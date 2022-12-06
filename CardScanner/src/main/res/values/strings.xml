@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="manual_entry_details_text">Make sure that card number and other info is exactly as it appears on the card</string>
+    <string name="credit_card_number">Credit Card Number<font color='#e7492E'>*</font></string>
+    <string name="month">Month<font color='#e7492E'>*</font></string>
+    <string name="year">Year<font color='#e7492E'>*</font></string>
+    <string name="mm_yy">MM/YY<font color='#e7492E'>*</font></string>
+    <string name="credit_card_details">Credit card details</string>
+    <string name="continue_btn_text">Continue</string>
+</resources>

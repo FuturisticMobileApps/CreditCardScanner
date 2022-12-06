@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.FullScreenDialog" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <!-- Custom View themes. -->
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/edit_text_margin</item>
+        <item name="background">@color/app_background</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/margin_small</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/margin_small</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/margin_small</item>
+        <item name="boxCornerRadiusTopStart">@dimen/margin_small</item>
+        <item name="boxStrokeColor">@color/blue_stroke</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="errorEnabled">false</item>
+        <item name="hintEnabled">true</item>
+        <item name="endIconMode">custom</item>
+        <item name="endIconTint">@color/icon_color</item>
+    </style>
+
+    <style name="TextInputEditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/padding_text</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">@dimen/medium_text</item>
+        <item name="android:inputType">numberSigned</item>
+    </style>
+
+
+</resources>

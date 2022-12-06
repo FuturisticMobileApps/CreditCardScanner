@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CreditCardScanner</string>
+    <string name="credit_card_number">Credit Card Number<font color='#e7492E'>*</font></string>
+    <string name="month">Month<font color='#e7492E'>*</font></string>
+    <string name="year">Year<font color='#e7492E'>*</font></string>
+    <string name="credit_card_details">Credit card details</string>
+    <string name="scan_card">Scan card</string>
+</resources>
