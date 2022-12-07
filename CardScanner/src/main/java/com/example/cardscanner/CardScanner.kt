@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -16,6 +17,7 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import com.example.cardscanner.databinding.CustomScannerBinding
@@ -28,6 +30,9 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -60,11 +65,11 @@ class CardScanner(private val cardDetails: CreditCardDetails) :
 
         binding = CustomScannerBinding.bind(view)
 
-        initEditTextFields()
+         initEditTextFields()
 
-        requestCameraPermission()
+         requestCameraPermission()
 
-        setOnClickListener()
+         setOnClickListener()
 
     }
 
@@ -203,6 +208,10 @@ class CardScanner(private val cardDetails: CreditCardDetails) :
             imageCapture = ImageCapture.Builder().build()
 
             imageAnalyzer.setAnalyzer(cameraExecutor) { imageProxy: ImageProxy? ->
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    binding.progressBar.visibility = View.GONE
+                }
 
                 imageProxy.getTextFromScannedImage { cardDetailsFromApi ->
 

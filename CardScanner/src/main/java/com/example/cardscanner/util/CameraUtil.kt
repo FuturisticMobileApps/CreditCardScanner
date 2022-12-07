@@ -12,6 +12,8 @@ const val INFO_TAG = "cardScanner_info"
 private val creditCardPattern =
     Pattern.compile("^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})")
 
+private val expiryDatePattern = Pattern.compile("[0-9]{2}/[0-9]{2}")
+
 fun Text?.setValuesFromVisionText(
     cardDetails: (cardNumber: String, expiryDate: String, cardType: String) -> Unit,
 ) {
@@ -22,21 +24,28 @@ fun Text?.setValuesFromVisionText(
 
         var cardNumber = ""
 
-        textBlocks
-            .flatMap { it.lines }
-            .forEach { lines ->
-                with(lines.text.validateString()) {
+        textBlocks.flatMap { it.lines }.forEach { lines ->
 
-                    if (contains("/") && length == 5)
-                        datesList.add(this)
+            with(lines.text.validateString()) {
 
-                    if (isCardNumberValid())
-                        cardNumber = this.replace(" ", "")
+                if (contains("/") && length == 5) datesList.add(this)
+
+                if (contains("/") && length > 5) {
+
+                    split(" ").filter { it.length == 5 && it.contains("/") }.forEach {
+
+                        datesList.add(it)
+                    }
                 }
-            }
 
-        if (cardNumber.isValidString() && datesList.getExpiryDate().isValidString())
-            cardDetails(cardNumber, datesList.getExpiryDate(), cardNumber.getCardType().cardType)
+                if (isCardNumberValid()) cardNumber = this.replace(" ", "")
+            }
+        }
+
+        if (cardNumber.isValidString() && datesList.getExpiryDate().isValidString()) cardDetails(
+            cardNumber,
+            datesList.getExpiryDate(),
+            cardNumber.getCardType().cardType)
     }
 }
 
@@ -91,9 +100,11 @@ private fun String.isCardNumberValid(): Boolean =
 
 private fun ArrayList<String>.getExpiryDate(): String {
 
-    val maxDate = maxOfOrNull { it.substring(it.length - 2, it.length).toInt() }
+    val maxDate = maxOfOrNull { it.substring(it.length - 2, it.length).parseInt() }
 
-    val currentDate = find { it.substring(it.length - 2, it.length).toInt() == maxDate }
+    if (maxDate == 0) return ""
+
+    val currentDate = find { it.substring(it.length - 2, it.length).parseInt() == maxDate }
 
     return currentDate.validateString()
 }

@@ -167,4 +167,28 @@
         android:textAllCaps="false"
         android:visibility="gone" />
 
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/progressBar"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_below="@id/cameraCard"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/app_background"
+        app:cardCornerRadius="100dp"
+        app:cardElevation="0dp">
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminate="true"
+            android:indeterminateTint="#0044FF"
+            android:indeterminateTintMode="src_atop"
+            android:padding="1dp" />
+
+    </androidx.cardview.widget.CardView>
+
+
 </RelativeLayout>

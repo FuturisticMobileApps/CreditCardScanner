@@ -234,6 +234,13 @@ fun TextInputEditText.isValidExpiryDate(): Boolean {
     return true
 }
 
+fun String.parseInt(): Int = try {
+    validateString().toInt()
+} catch (e: Exception) {
+    0
+}
+
+
 private fun getCurrentYear(): Int = Calendar.getInstance().get(Calendar.YEAR)
 
 private fun getCurrentMonth(): Int = Calendar.getInstance().get(Calendar.MONTH)
