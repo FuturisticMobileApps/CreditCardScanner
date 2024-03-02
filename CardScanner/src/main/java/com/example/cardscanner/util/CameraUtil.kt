@@ -15,7 +15,7 @@ private val creditCardPattern =
 private val expiryDatePattern = Pattern.compile("[0-9]{2}/[0-9]{2}")
 
 fun Text?.setValuesFromVisionText(
-    cardDetails: (cardNumber: String, expiryDate: String, cardType: String) -> Unit,
+    cardDetails: (cardNumber: String, expiryDate: String, cardType: String, cardIcon : Int) -> Unit,
 ) {
 
     this?.let {
@@ -45,7 +45,8 @@ fun Text?.setValuesFromVisionText(
         if (cardNumber.isValidString() && datesList.getExpiryDate().isValidString()) cardDetails(
             cardNumber,
             datesList.getExpiryDate(),
-            cardNumber.getCardType().cardType)
+            cardNumber.getCardType().cardType,
+            cardNumber.getCardType().cardIcon)
     }
 }
 

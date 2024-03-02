@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -13,11 +12,14 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageProxy
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import com.example.cardscanner.databinding.CustomScannerBinding
@@ -25,7 +27,17 @@ import com.example.cardscanner.scanner.CardDetails
 import com.example.cardscanner.scanner.CardType
 import com.example.cardscanner.scanner.CreditCardDetails
 import com.example.cardscanner.scanner.PermissionDeniedDialog
-import com.example.cardscanner.util.*
+import com.example.cardscanner.util.ERROR_TAG
+import com.example.cardscanner.util.INFO_TAG
+import com.example.cardscanner.util.clearError
+import com.example.cardscanner.util.getTextFromTextView
+import com.example.cardscanner.util.isValidExpiryDate
+import com.example.cardscanner.util.isValidString
+import com.example.cardscanner.util.scaleImage
+import com.example.cardscanner.util.setCreditCard
+import com.example.cardscanner.util.setErrorMessage
+import com.example.cardscanner.util.setExpiryDate
+import com.example.cardscanner.util.setValuesFromVisionText
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
@@ -65,11 +77,11 @@ class CardScanner(private val cardDetails: CreditCardDetails) :
 
         binding = CustomScannerBinding.bind(view)
 
-         initEditTextFields()
+        initEditTextFields()
 
-         requestCameraPermission()
+        requestCameraPermission()
 
-         setOnClickListener()
+        setOnClickListener()
 
     }
 
@@ -96,8 +108,10 @@ class CardScanner(private val cardDetails: CreditCardDetails) :
             if (isGranted) initializeCamera()
             else {
 
-                if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),
-                        Manifest.permission.CAMERA)
+                if (!ActivityCompat.shouldShowRequestPermissionRationale(
+                        requireActivity(),
+                        Manifest.permission.CAMERA
+                    )
                 ) {
 
                     PermissionDeniedDialog({
@@ -139,9 +153,14 @@ class CardScanner(private val cardDetails: CreditCardDetails) :
 
                 if (isValidCardInfo()) {
 
-                    cardDetails.cardDetails((CardDetails(cardNumber = etCardNumber.getTextFromTextView(),
-                        expiryDate = etExpiryDate.getTextFromTextView(),
-                        cardType = cardType?.cardType ?: "Unknown")))
+                    cardDetails.cardDetails(
+                        (CardDetails(
+                            cardNumber = etCardNumber.getTextFromTextView(),
+                            expiryDate = etExpiryDate.getTextFromTextView(),
+                            cardType = cardType?.cardType ?: "Unknown",
+                            cardIcon = cardType?.cardIcon ?: R.drawable.ic_card_grey
+                        ))
+                    )
 
                     dismiss()
                 }
@@ -228,11 +247,13 @@ class CardScanner(private val cardDetails: CreditCardDetails) :
 
                 cameraProvider.unbindAll()
 
-                cameraProvider.bindToLifecycle(this,
+                cameraProvider.bindToLifecycle(
+                    this,
                     cameraSelector,
                     preview,
                     imageCapture,
-                    imageAnalyzer)
+                    imageAnalyzer
+                )
 
             } catch (e: java.lang.Exception) {
 
@@ -278,17 +299,19 @@ class CardScanner(private val cardDetails: CreditCardDetails) :
                 recognizer.process(image)
 
                     .addOnSuccessListener { result: Text? ->
-                        result.setValuesFromVisionText { cardNumber, expiryDate, cardType ->
+                        result.setValuesFromVisionText { cardNumber, expiryDate, cardType, cardIcon ->
                             Log.i(INFO_TAG, "Get card details successfully!")
-                            cardDetails(CardDetails(cardNumber, expiryDate, cardType))
+                            cardDetails(CardDetails(cardNumber, expiryDate, cardType, cardIcon))
                         }
                     }
 
                     .addOnFailureListener { exception ->
                         Log.e(ERROR_TAG, exception.message.setErrorMessage())
                         Log.e(ERROR_TAG, exception.localizedMessage.setErrorMessage())
-                        Log.i(INFO_TAG,
-                            "Download library failed, make sure your testing device or emulator has google playstore.")
+                        Log.i(
+                            INFO_TAG,
+                            "Download library failed, make sure your testing device or emulator has google playstore."
+                        )
                     }
 
                     .addOnCompleteListener { this?.close() }

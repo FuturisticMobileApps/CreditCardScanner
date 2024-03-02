@@ -1,9 +1,11 @@
 package com.example.creditcardscanner
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.example.cardscanner.CardScanner
 import com.example.cardscanner.scanner.CardDetails
@@ -30,7 +32,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun getCardDetails() {
 
+
         with(bind) {
+
 
             tvScanner.setOnClickListener {
 
@@ -42,9 +46,15 @@ class MainActivity : AppCompatActivity() {
 
                         etCreditCard.setText(cardDetails.cardNumber)
 
+                        tilCreditCard.setEndIconDrawable(cardDetails.cardIcon)
+
                         acsMonth.setText(expiryDate[0])
 
                         acsYear.setText(expiryDate[1])
+
+                        val drawable: Drawable? = ContextCompat.getDrawable(this@MainActivity, cardDetails.cardIcon)
+
+                        etCreditCard.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
 
                         if (cardDetails.cardType != "Unknown") {
                             tvCardtypeLabel.visibility = View.VISIBLE
