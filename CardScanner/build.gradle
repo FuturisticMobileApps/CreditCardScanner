@@ -56,7 +56,7 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
                 groupId = 'com.github.FuturisticMobileApps'
-                artifactId = 'credit-card-scanner'
+                artifactId = 'creditCardScanner'
                 version = '1.0'
             }
         }
