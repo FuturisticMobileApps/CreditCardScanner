@@ -6,12 +6,11 @@ plugins {
 
 android {
     namespace 'com.example.cardscanner'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdk 21
-        targetSdk 33
-
+        targetSdk 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -56,7 +55,7 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 from components.release
-                groupId = 'com.github.futuristicmobileapps'
+                groupId = 'com.github.FuturisticMobileApps'
                 artifactId = 'credit-card-scanner'
                 version = '1.0'
             }
