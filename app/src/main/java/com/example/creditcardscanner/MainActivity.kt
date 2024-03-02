@@ -2,16 +2,13 @@ package com.example.creditcardscanner
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.widget.doOnTextChanged
 import com.example.cardscanner.CardScanner
 import com.example.cardscanner.scanner.CardDetails
 import com.example.cardscanner.scanner.CreditCardDetails
 import com.example.creditcardscanner.databinding.ActivityMainBinding
-import java.util.regex.Pattern
 
 
 class MainActivity : AppCompatActivity() {
@@ -63,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
 
-                }).show(supportFragmentManager, "Scan_Card")
+                }).show(supportFragmentManager, "CreditCardScannerDialog")
 
             }
         }
