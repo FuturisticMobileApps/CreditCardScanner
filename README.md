@@ -1,4 +1,4 @@
-
+hi 
 # Fast, Lightweight, and Offline Credit Card Scanner Android Library
 
 This Android library offers a fast, lightweight, and offline solution for credit/debit card scanning. Leveraging Firebase ML Kit and CameraX technologies, it effortlessly extracts crucial card details including the card number, type, and expiry date. Seamlessly integrate this solution into your Android projects to enhance user experiences and simplify payment processes.
